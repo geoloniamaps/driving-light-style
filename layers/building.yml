@@ -1,0 +1,15 @@
+id: building
+type: fill
+source: geolonia
+source-layer: building
+minzoom: 15
+paint:
+  fill-color: '#e0e2e4'
+  fill-opacity:
+    stops:
+      - - 15
+        - 0
+      - - 16
+        - 0.4
+      - - 18
+        - 0.5

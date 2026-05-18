@@ -1,0 +1,39 @@
+id: bridge
+type: line
+source: geolonia
+source-layer: transportation
+minzoom: 11
+filter:
+  - all
+  - - ==
+    - brunnel
+    - bridge
+  - - in
+    - class
+    - primary
+    - secondary
+    - tertiary
+    - trunk
+    - motorway
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#f8f8fa'
+  line-width:
+    - interpolate
+    - - exponential
+      - 0.9
+    - - zoom
+    - 6
+    - 0.5
+    - 12
+    - 1.5
+    - 14
+    - 4
+    - 16
+    - 12
+    - 18
+    - 20
+    - 20
+    - 150

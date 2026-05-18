@@ -1,0 +1,22 @@
+id: waterway
+type: line
+source: geolonia
+source-layer: waterway
+minzoom: 11
+filter:
+  - all
+  - - ==
+    - $type
+    - LineString
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#b0c8e0'
+  line-width:
+    base: 1.3
+    stops:
+      - - 13
+        - 1.5
+      - - 20
+        - 6

@@ -1,0 +1,35 @@
+id: highway-minor
+type: line
+source: geolonia
+source-layer: transportation
+minzoom: 14
+filter:
+  - all
+  - - ==
+    - $type
+    - LineString
+  - - '!='
+    - brunnel
+    - tunnel
+  - - in
+    - class
+    - minor
+    - service
+    - track
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#e8eaec'
+  line-width:
+    - interpolate
+    - - linear
+    - - zoom
+    - 13
+    - 0.3
+    - 14
+    - 1.5
+    - 16
+    - 6
+    - 20
+    - 16

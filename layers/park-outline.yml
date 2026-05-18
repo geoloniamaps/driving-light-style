@@ -1,0 +1,12 @@
+id: park-outline
+type: line
+source: geolonia
+source-layer: park
+minzoom: 15
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#b8d0b0'
+  line-width: 1
+  line-opacity: 0.3

@@ -1,0 +1,26 @@
+id: place-country
+type: symbol
+source: geolonia
+source-layer: place
+filter:
+  - all
+  - - ==
+    - class
+    - country
+layout:
+  text-font:
+    - Noto Sans Universal Bold
+  text-size:
+    stops:
+      - - 1
+        - 14
+      - - 5
+        - 24
+  text-field: '{name}'
+  text-max-width: 6
+  text-padding: 40
+  text-letter-spacing: 0.15
+paint:
+  text-color: '#202830'
+  text-halo-width: 3.5
+  text-halo-color: '#f0f2f4'
