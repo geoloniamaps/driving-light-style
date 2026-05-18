@@ -1,0 +1,19 @@
+id: building-outline
+type: line
+source: geolonia
+source-layer: building
+minzoom: 16
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#c8ccd0'
+  line-width: 1
+  line-opacity:
+    stops:
+      - - 16
+        - 0
+      - - 17
+        - 0.3
+      - - 18
+        - 0.4

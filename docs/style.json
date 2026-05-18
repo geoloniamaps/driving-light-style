@@ -1,0 +1,1291 @@
+{
+  "version": 8,
+  "name": "Driving Light Style (ドライブの地図・ライト)",
+  "sources": {
+    "geolonia": {
+      "type": "vector",
+      "url": "https://tileserver.geolonia.com/v2_combined2/tiles.json?key=YOUR-API-KEY"
+    }
+  },
+  "glyphs": "https://glyphs.geolonia.com/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "landcover-grass",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "landcover",
+      "minzoom": 11,
+      "filter": [
+        "==",
+        "class",
+        "grass"
+      ],
+      "paint": {
+        "fill-color": "#e0ecd8",
+        "fill-opacity": 0.5
+      }
+    },
+    {
+      "id": "landcover-wood",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "landcover",
+      "minzoom": 11,
+      "filter": [
+        "==",
+        "class",
+        "wood"
+      ],
+      "paint": {
+        "fill-color": "#d0e0c8",
+        "fill-opacity": 0.5
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "#c0d8f0"
+      }
+    },
+    {
+      "id": "oc-water",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "oc-water",
+      "paint": {
+        "fill-color": "#b0c8e0"
+      }
+    },
+    {
+      "id": "water-outline",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "water",
+      "minzoom": 10,
+      "paint": {
+        "line-color": "#90b0d0",
+        "line-width": {
+          "stops": [
+            [
+              5,
+              0.5
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              15,
+              1.5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "waterway",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "waterway",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#b0c8e0",
+        "line-width": {
+          "base": 1.3,
+          "stops": [
+            [
+              13,
+              1.5
+            ],
+            [
+              20,
+              6
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "park",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "park",
+      "minzoom": 13,
+      "paint": {
+        "fill-color": "#d8ecd0",
+        "fill-opacity": 0.4
+      }
+    },
+    {
+      "id": "park-outline",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "park",
+      "minzoom": 15,
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#b8d0b0",
+        "line-width": 1,
+        "line-opacity": 0.3
+      }
+    },
+    {
+      "id": "tunnel-casing",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "brunnel",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c0c4c8",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          1,
+          12,
+          2,
+          14,
+          5,
+          16,
+          14,
+          18,
+          22
+        ]
+      }
+    },
+    {
+      "id": "tunnel",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "brunnel",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#e0e4e8",
+        "line-dasharray": [
+          4,
+          2
+        ],
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0.5,
+          12,
+          1.5,
+          14,
+          3.5,
+          16,
+          10,
+          18,
+          18
+        ]
+      }
+    },
+    {
+      "id": "highway-area",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 14,
+      "filter": [
+        "==",
+        "$type",
+        "Polygon"
+      ],
+      "paint": {
+        "fill-color": "#e0e4e8",
+        "fill-opacity": 0.7
+      }
+    },
+    {
+      "id": "highway-minor-casing",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!=",
+          "brunnel",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "minor",
+          "service",
+          "track"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c8ccd0",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          14,
+          0,
+          14.5,
+          4,
+          16,
+          10,
+          20,
+          20
+        ]
+      }
+    },
+    {
+      "id": "highway-major-casing",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 8,
+      "filter": [
+        "all",
+        [
+          "!in",
+          "brunnel",
+          "bridge",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#9098a0",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          1,
+          12,
+          2.5,
+          14,
+          6,
+          16,
+          16,
+          18,
+          24,
+          20,
+          160
+        ]
+      }
+    },
+    {
+      "id": "highway-motorway-casing",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!in",
+          "brunnel",
+          "bridge",
+          "tunnel"
+        ],
+        [
+          "==",
+          "class",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#1860a8",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          5,
+          1.5,
+          6,
+          1.5,
+          14,
+          6,
+          16,
+          16,
+          18,
+          24,
+          20,
+          160
+        ]
+      }
+    },
+    {
+      "id": "highway-path",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 16,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!in",
+          "brunnel",
+          "bridge",
+          "tunnel"
+        ],
+        [
+          "==",
+          "class",
+          "path"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c8ccd0",
+        "line-width": {
+          "base": 3,
+          "stops": [
+            [
+              16,
+              1
+            ],
+            [
+              17,
+              2
+            ],
+            [
+              18,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "highway-minor",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!=",
+          "brunnel",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "minor",
+          "service",
+          "track"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#e8eaec",
+        "line-width": [
+          "interpolate",
+          [
+            "linear"
+          ],
+          [
+            "zoom"
+          ],
+          13,
+          0.3,
+          14,
+          1.5,
+          16,
+          6,
+          20,
+          16
+        ]
+      }
+    },
+    {
+      "id": "highway-major",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 7,
+      "filter": [
+        "all",
+        [
+          "!in",
+          "brunnel",
+          "bridge",
+          "tunnel"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#ffffff",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0.5,
+          12,
+          1.5,
+          14,
+          4,
+          16,
+          12,
+          18,
+          20,
+          20,
+          150
+        ]
+      }
+    },
+    {
+      "id": "highway-motorway",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 5,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "!in",
+          "brunnel",
+          "bridge",
+          "tunnel"
+        ],
+        [
+          "==",
+          "class",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#2878d0",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          5,
+          0.4,
+          8,
+          1,
+          14,
+          4,
+          16,
+          12,
+          18,
+          20,
+          20,
+          150
+        ]
+      }
+    },
+    {
+      "id": "railway",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "rail"
+        ],
+        [
+          "!has",
+          "service"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c0c4c8",
+        "line-width": {
+          "stops": [
+            [
+              10,
+              0.5
+            ],
+            [
+              14,
+              1
+            ],
+            [
+              18,
+              2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "railway-hatching",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "rail"
+        ],
+        [
+          "!has",
+          "service"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c0c4c8",
+        "line-dasharray": [
+          1,
+          4
+        ],
+        "line-width": {
+          "stops": [
+            [
+              10,
+              2
+            ],
+            [
+              14,
+              4
+            ],
+            [
+              18,
+              6
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "bridge-casing",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "brunnel",
+          "bridge"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#9098a0",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          1,
+          12,
+          2.5,
+          14,
+          6,
+          16,
+          16,
+          18,
+          24,
+          20,
+          160
+        ]
+      }
+    },
+    {
+      "id": "bridge",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "transportation",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "brunnel",
+          "bridge"
+        ],
+        [
+          "in",
+          "class",
+          "primary",
+          "secondary",
+          "tertiary",
+          "trunk",
+          "motorway"
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#f8f8fa",
+        "line-width": [
+          "interpolate",
+          [
+            "exponential",
+            0.9
+          ],
+          [
+            "zoom"
+          ],
+          6,
+          0.5,
+          12,
+          1.5,
+          14,
+          4,
+          16,
+          12,
+          18,
+          20,
+          20,
+          150
+        ]
+      }
+    },
+    {
+      "id": "building",
+      "type": "fill",
+      "source": "geolonia",
+      "source-layer": "building",
+      "minzoom": 15,
+      "paint": {
+        "fill-color": "#e0e2e4",
+        "fill-opacity": {
+          "stops": [
+            [
+              15,
+              0
+            ],
+            [
+              16,
+              0.4
+            ],
+            [
+              18,
+              0.5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "building-outline",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "building",
+      "minzoom": 16,
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#c8ccd0",
+        "line-width": 1,
+        "line-opacity": {
+          "stops": [
+            [
+              16,
+              0
+            ],
+            [
+              17,
+              0.3
+            ],
+            [
+              18,
+              0.4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundary-land-level-2",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "boundary",
+      "maxzoom": 6,
+      "filter": [
+        "all",
+        [
+          "==",
+          [
+            "get",
+            "admin_level"
+          ],
+          2
+        ],
+        [
+          "==",
+          [
+            "has",
+            "maritime"
+          ],
+          false
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#b0b8c0",
+        "line-width": {
+          "stops": [
+            [
+              0,
+              1
+            ],
+            [
+              6,
+              2
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundary-land-level-4",
+      "type": "line",
+      "source": "geolonia",
+      "source-layer": "boundary",
+      "minzoom": 4,
+      "filter": [
+        "all",
+        [
+          "in",
+          "admin_level",
+          4,
+          6
+        ],
+        [
+          "!=",
+          "maritime",
+          1
+        ]
+      ],
+      "layout": {
+        "line-cap": "butt",
+        "line-join": "bevel"
+      },
+      "paint": {
+        "line-color": "#b8c0c8",
+        "line-dasharray": [
+          4,
+          2
+        ],
+        "line-width": {
+          "stops": [
+            [
+              4,
+              0.5
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              12,
+              1.5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "water-name",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "water_name",
+      "minzoom": 8,
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              3,
+              10
+            ],
+            [
+              8,
+              14
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 5,
+        "text-padding": 10,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "#4878a0",
+        "text-halo-width": 2,
+        "text-halo-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "road-name",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "transportation_name",
+      "minzoom": 11,
+      "filter": [
+        "all",
+        [
+          "==",
+          "network",
+          "road"
+        ],
+        [
+          "in",
+          "class",
+          "trunk",
+          "primary",
+          "secondary",
+          "tertiary"
+        ],
+        [
+          "!in",
+          "brunnel",
+          "tunnel"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Bold"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              11,
+              11
+            ],
+            [
+              14,
+              14
+            ],
+            [
+              18,
+              16
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 8,
+        "text-padding": 50,
+        "symbol-placement": "line",
+        "symbol-spacing": {
+          "base": 1000,
+          "stops": [
+            [
+              10,
+              800
+            ],
+            [
+              12,
+              600
+            ],
+            [
+              15,
+              400
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#303840",
+        "text-halo-width": 2.5,
+        "text-halo-color": "#ffffff"
+      }
+    },
+    {
+      "id": "place-village",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "place",
+      "minzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "village"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Regular"
+        ],
+        "text-size": 13,
+        "text-field": "{name}",
+        "text-max-width": 6,
+        "text-padding": 20,
+        "text-letter-spacing": 0.05
+      },
+      "paint": {
+        "text-color": "#485060",
+        "text-halo-width": 2.5,
+        "text-halo-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "place-town",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "place",
+      "minzoom": 8,
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "town"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              7,
+              13
+            ],
+            [
+              12,
+              17
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 6,
+        "text-padding": 20,
+        "text-letter-spacing": 0.05
+      },
+      "paint": {
+        "text-color": "#384050",
+        "text-halo-width": 3,
+        "text-halo-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "place-city",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "place",
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "city"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Bold"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              5,
+              15
+            ],
+            [
+              10,
+              22
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 6,
+        "text-padding": 30,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "#202830",
+        "text-halo-width": 3.5,
+        "text-halo-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "place-state",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "place",
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "state"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Regular"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              4,
+              12
+            ],
+            [
+              8,
+              16
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 6,
+        "text-padding": 30,
+        "text-letter-spacing": 0.1
+      },
+      "paint": {
+        "text-color": "#607080",
+        "text-halo-width": 2.5,
+        "text-halo-color": "#f0f2f4"
+      }
+    },
+    {
+      "id": "place-country",
+      "type": "symbol",
+      "source": "geolonia",
+      "source-layer": "place",
+      "filter": [
+        "all",
+        [
+          "==",
+          "class",
+          "country"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Noto Sans Universal Bold"
+        ],
+        "text-size": {
+          "stops": [
+            [
+              1,
+              14
+            ],
+            [
+              5,
+              24
+            ]
+          ]
+        },
+        "text-field": "{name}",
+        "text-max-width": 6,
+        "text-padding": 40,
+        "text-letter-spacing": 0.15
+      },
+      "paint": {
+        "text-color": "#202830",
+        "text-halo-width": 3.5,
+        "text-halo-color": "#f0f2f4"
+      }
+    }
+  ]
+}

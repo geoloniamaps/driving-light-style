@@ -1,0 +1,39 @@
+id: highway-motorway
+type: line
+source: geolonia
+source-layer: transportation
+minzoom: 5
+filter:
+  - all
+  - - ==
+    - $type
+    - LineString
+  - - '!in'
+    - brunnel
+    - bridge
+    - tunnel
+  - - ==
+    - class
+    - motorway
+layout:
+  line-cap: butt
+  line-join: bevel
+paint:
+  line-color: '#2878d0'
+  line-width:
+    - interpolate
+    - - exponential
+      - 0.9
+    - - zoom
+    - 5
+    - 0.4
+    - 8
+    - 1
+    - 14
+    - 4
+    - 16
+    - 12
+    - 18
+    - 20
+    - 20
+    - 150
