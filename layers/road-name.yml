@@ -19,7 +19,7 @@ filter:
     - tunnel
 layout:
   text-font:
-    - Noto Sans Universal Bold
+    - Noto Sans CJK JP Bold
   text-size:
     stops:
       - - 11
